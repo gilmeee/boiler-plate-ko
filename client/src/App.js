@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import LandingPage from "./components/views/LandingPage/LandingPage";
+import LoginPage from "./components/views/LoginPage/LoginPage";
+import RegisterPage from "./components/views/RegisterPage/RegisterPage";
+import Auth from "./hoc/auth";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={<Auth SpecificComponent={LandingPage} option={null} />} // 함수 호출 대신 컴포넌트 전달
+          />
+          <Route
+            path="/login"
+            element={<Auth SpecificComponent={LoginPage} option={false} />} // 함수 호출 대신 컴포넌트 전달
+          />
+          <Route
+            path="/register"
+            element={<Auth SpecificComponent={RegisterPage} option={false} />} // 함수 호출 대신 컴포넌트 전달
+          />
+        </Routes>
+      </Router>
     </div>
   );
 }
